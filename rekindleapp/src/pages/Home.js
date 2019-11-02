@@ -40,7 +40,7 @@ export default class HomeScreen extends Component {
             <LoginComp onRef={ref => (this.parentReference = ref)} parentReference={this.retrieveDataFromLoginChild.bind(this)}/>
             <Text>{this.state.currentUserName}</Text>
             {Friends}
-            <Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>
+            <Button title="See friends" onPress={() => navigate('Friends', {userName: this.state.currentUserName})}/>
         </SafeAreaView>
       );
     }
