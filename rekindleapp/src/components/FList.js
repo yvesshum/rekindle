@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal'
-
-export default class FList extends Component {
+import { withNavigation } from 'react-navigation';
+class FList extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -107,3 +107,5 @@ export default class FList extends Component {
       fontSize: 20
     }
   });
+
+export default withNavigation(FList);
