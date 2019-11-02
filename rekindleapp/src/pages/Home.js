@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import { SafeAreaView, View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import LoginComp from '../components/Login.js';
+import SafeAreaView from 'react-native-safe-area-view';
 
 export default class HomeScreen extends Component {
 
@@ -10,19 +11,21 @@ export default class HomeScreen extends Component {
         this.state={
             userFriends: [],
             currentUserName: "",
+            currentUserLikes: [],
         }
 
     }
     static navigationOptions = {
-      title: 'Welcome',
+      header: null,
     };
 
     
     retrieveDataFromLoginChild(data){
         console.warn('retrieved data:', data);
-        this.setState({userFriends: data.friends})
-        console.warn('friends:', this.state.userFriends)
-        this.setState({currentUserName: data.name})
+        this.setState({userFriends: data.friends});
+        console.warn('friends:', this.state.userFriends);
+        this.setState({currentUserName: data.name});
+        this.setState({currentUserLikes: data.likes.data})
     }
 
     render() {
@@ -33,14 +36,32 @@ export default class HomeScreen extends Component {
       );
 
       return (
-        <View>
+        <SafeAreaView style={HomeStyles.container}>
             <LoginComp onRef={ref => (this.parentReference = ref)} parentReference={this.retrieveDataFromLoginChild.bind(this)}/>
             <Text>{this.state.currentUserName}</Text>
             {Friends}
             <Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>
-        </View>
-    
+        </SafeAreaView>
       );
     }
-  }
+
+}
+
+const HomeStyles = StyleSheet.create({
+    container:{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#925dc5'
+
+    },
+    bigBlue: {
+        color: 'blue',
+        fontWeight: 'bold',
+        fontSize: 30,
+    },
+    red: {
+        color: 'red',
+    },
+});
 
