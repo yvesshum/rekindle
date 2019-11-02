@@ -79,7 +79,7 @@ export default class FList extends Component {
                   <View style={styles.image}>
                       <Image
                           style={{width: 75, height: 75}}
-                          source={require('../../assets/userData/yves.png')}
+                          source={require('../../assets/userData/yena.png')}
                       />
                   </View>
 
