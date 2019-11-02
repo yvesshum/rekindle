@@ -21,7 +21,7 @@
 
   "friends": [
     "2684866978225110",
-    "2984866978225110.json"
+    "2984866978225110"
   ],
   "id": "2559221700767822",
   "hometown": {
@@ -46,5 +46,17 @@
     ]
   },
   "sent_recipients": [],
-  "name": "Jiaqi Gao"
+  "name": "Jiaqi Gao",
+  "chats": [
+    {
+      "date": "11-01-2019",
+      "from": "Yves Shum",
+      "last_message": "Hey! It's been a while! I just flew into New York City, are you still working there? Let's grab ..."
+    },
+    {
+      "date": "10-22-2019",
+      "from": "Yena Kim",
+      "last_message": "Jiaqi! I didn't realize you were also in Chicago lol. It's been years ..."
+    }
+  ]
 }

@@ -97,7 +97,8 @@ constructor(props) {
       flists = this.getFriendsFromUser(userName).map((friend) => {
         return {
           name: friend[1],
-          id: friend[0]
+          id: friend[0],
+          active: 0.5
         }
       })
 
@@ -132,7 +133,7 @@ constructor(props) {
               <View style={FriendStyles.chatHeader}>
                 <Text style={FriendStyles.title}>Messages &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </Text>
 
-                <Icon style={FriendStyles.add} size={50} color="black" name="add-box" onPress={() => navigate('Messages', {blank:"True", userName: this.userName, friendsList: flists})}/>
+                <Icon style={FriendStyles.add} size={50} color="black" name="add-box" onPress={() => navigate('Messages', {blank:"True", userName: this.props.userName, friendsList: flists})}/>
 
               </View>
 
