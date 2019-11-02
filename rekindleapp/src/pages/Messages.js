@@ -85,7 +85,7 @@ export default class Messages extends Component {
     render() {
         const { navigation } = this.props;
 
-        friendsList = [navigation.getParam('friendsList')];
+       const friendsList = navigation.getParam('friendsList');
       const { search } = this.state;
 
       return (
@@ -119,8 +119,9 @@ export default class Messages extends Component {
                     <Text>People</Text>
 
                     {friendsList.map((friend) => {
-                        if (search.length < 3 || (friend["name"]).slice(0, this.state.search.length) == this.state.search) {
-                        <FList key={friend["id"]} name={friend["name"]} />
+                        console.warn(friend.name);
+                        if (search.length < 3 || (friend.name).slice(0, this.state.search.length) == this.state.search) {
+                        <FList key={friend.id} name={friend.name} />
                         }
                     })}
 
