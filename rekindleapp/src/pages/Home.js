@@ -21,9 +21,7 @@ export default class HomeScreen extends Component {
 
     
     retrieveDataFromLoginChild(data){
-        console.warn('retrieved data:', data);
         this.setState({userFriends: data.friends});
-        console.warn('friends:', this.state.userFriends);
         this.setState({currentUserName: data.name});
         this.setState({currentUserLikes: data.likes.data});
         if (data) {
