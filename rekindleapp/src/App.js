@@ -22,11 +22,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import HomeScreen from './pages/Home';
 import Friends from './pages/Friends';
-
+import Walkthrough from './pages/Walkthrough'
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
   Friends: {screen: Friends},
+  Walkthrough: {screen: Walkthrough}
 });
 
 const App = createAppContainer(MainNavigator);
