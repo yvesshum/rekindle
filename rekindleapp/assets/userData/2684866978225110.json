@@ -24,13 +24,27 @@
     ]
   },
   "hometown": {
-    "name": "Hong Kong"
+    "data": [
+      {
+        "name": "Hong Kong"
+      }
+    ]
   },
-  "education": [
-    {
-      "name": "University of Chicago"
-    }
-  ],
+  "education": {
+    "data": [
+      {
+        "name": "University of Chicago"
+      }
+    ]
+  },
+  "location": {
+    "data": [
+      {
+        "name": "Chicago"
+      }
+    ]
+  },
+
   "sent_recipients": [],
   "id": "2684866978225110",
   "friends": [

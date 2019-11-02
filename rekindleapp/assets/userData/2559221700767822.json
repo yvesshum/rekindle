@@ -18,18 +18,32 @@
       }
     ]
   },
+
   "friends": [
     "2684866978225110"
   ],
   "id": "2559221700767822",
   "hometown": {
-    "name": "New York"
+    "data": [
+      {
+        "name": "New York"
+      }
+    ]
   },
-  "education": [
-    {
-      "name": "University of Chicago"
-    }
-  ],
+  "education": {
+    "data": [
+      {
+        "name": "University of Chicago"
+      }
+    ]
+  },
+  "location": {
+    "data": [
+      {
+        "name": "Chicago"
+      }
+    ]
+  },
   "sent_recipients": [],
   "name": "Jiaqi Gao"
 }
