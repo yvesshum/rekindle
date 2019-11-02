@@ -22,15 +22,32 @@ export default class Log extends Component {
         }
     }
 
+
+  getUserUrl(id) {
+    //since we don't have a database here we go!
+
+    switch (id) {
+        case "Jiaqi Gao":
+            return require('../../assets/userData/yves.png');
+        case "Yves Shum":
+            return require('../../assets/userData/yves.png');
+        case "Yena Kim":
+            return require('../../assets/userData/yena.png');
+        default:
+            return require('../../assets/userData/yena.png');
+    }
+  }
+
     render() {
-        console.warn(this.props.url);
+        console.warn(this.props.url)
+
       return (
           <View style={{flexDirection: 'row', margin: 20, alignItems: 'center', opacity: this.state.active}}>
               <TouchableOpacity style={{flex: 9, flexDirection: 'row'}} >
                   <View style={styles.image}>
                       <Image
                           style={{width: 60, height: 60}}
-                          source={require('../../assets/userData/yves.png')}
+                          source={this.getUserUrl(this.props.from)}
                       />
                   </View>
 
