@@ -10,7 +10,7 @@ import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation'
 
-export default class Friends extends Component {
+export default class Messages extends Component {
   state = {
     search: '',
     activeTab: 'Friends'
@@ -76,114 +76,70 @@ export default class Friends extends Component {
         }
     }
 
+    updateSearch = search => {
+        this.setState({ search });
+      };
+
     render() {
       const { navigation } = this.props;
-      const { navigate } = this.props.navigation;
 
       const userName = navigation.getParam('userName', 'NO-ID');
-
-      flists = this.getFriendsFromUser(userName).map((friend) => {
-        return {
-          name: friend[1],
-          id: friend[0]
-        }
-      })
 
       const { search } = this.state;
 
 
       return (
-       <View style={FriendStyles.flex}>
-         {this.state.activeTab == 'Friends' ?
-            <ScrollView>
-            {/* Friends list */}
-              <Text style={FriendStyles.header}>Friends</Text>
-              
-              <SearchBar
+        <View>
+             {this.props.name == "" ? 
+             <SearchBar
                 platform="ios"
                 placeholder="Type Here..."
                 onChangeText={this.updateSearch}
                 value={search}
-              />
-
-              {flists.map((friend) => {
-                if (search.length < 3 || (friend.name).slice(0, this.state.search.length) == this.state.search) {
-                  return (<FList key={friend.id} name={friend.name}></FList>)
-                }
-              })}
-            </ScrollView> : 
-
-            // Chat Messages
-
-            <ScrollView>
-
-              <View style={FriendStyles.chatHeader}>
-                <Text style={FriendStyles.title}>Messages &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </Text>
-
-                <Icon style={FriendStyles.add} size={50} color="black" name="add-box" onPress={() => navigate('Messages')}/>
-
-              </View>
-
-              
-              <SearchBar
-                platform="ios"
-                placeholder="Type Here..."
-                onChangeText={this.updateSearch}
-                value={search}
-                style={FriendStyles.chatSearch}
-              />
-
-            </ScrollView>
-            
-            
-            
-            }
-
-            <View style={FriendStyles.footer}>
-              <BottomNavigation 
-                onTabPress={newTab => this.setState({ activeTab: newTab.key })}
-                renderTab={this.renderTab}
-                tabs={this.tabs}
             />
-            </View>
-         
+
+
+          :
+          <View style={styles.heading}>
+               
+             <Text style={styles.name}>Long time no talk, nameHere</Text>
+              
+             <Image
+              style={styles.image}
+              style={{width: 100, height: 100}}
+              source={{uri: 'https://facebook.github.io/react-native/img/tiny_logo.png'}}
+              />
+
+          </View>
+          }
+
             
         </View>
+         
+         
+        
       );
     }
   }
 
-  const FriendStyles = StyleSheet.create({
-    header: {
-      marginTop: 20,
-      fontSize: 25,
-      marginBottom: 20,
-      flexDirection:'row', 
-      textAlign: "center",
+const styles = StyleSheet.create({
+    heading: {
+        alignItems: 'center',
+        marginTop: 100,
+        fontSize: 20,
+        margin: 20
     },
-    add: {
-      marginLeft: 500
+    image: {
+      marginRight: 10,
+      borderRadius: 10,
+      overflow: 'hidden',
+      textAlign: 'center'
     },
-    chatHeader: {
-      marginTop: 20,
-      marginBottom: 20,
-      flexDirection:'row', 
-      textAlign: "center",
+    details: {
+      margin: 10
     },
-    title: {
-      marginLeft: 150,
-      fontSize: 25,
-      marginTop: 10,
-      textAlign: "center"
-    },
-    chatSearch: {
-      position: 'absolute'
-    },
-    flex: {
-      flex: 1
-    },
-    footer: {
-      position: 'relative',
-      marginBottom: 0
+    name: {
+      fontSize: 20
     }
-});
+    
+  });
