@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 
-import {  View, Image, Text, Button, Modal, TouchableOpacity, TouchableHighlight} from 'react-native';
-
+import {  View, Image, Text, Button, TouchableOpacity, TouchableHighlight} from 'react-native';
+import Modal from 'react-native-modal'
 export default class Walkthrough extends Component {
 
     static navigationOptions = {
@@ -15,9 +15,11 @@ export default class Walkthrough extends Component {
         super(props);
         this.state={
             pageIndex: 0,
-            modalVisible: false
+            modalVisible: false,
+            modalNum: 0
         };
-        this.setModalVisible = this.setModalVisible.bind(this)
+        this.setModalVisible = this.setModalVisible.bind(this);
+        this.continueToMain = this.continueToMain.bind(this);
 
     }
     setModalVisible(visible) {
@@ -43,6 +45,11 @@ export default class Walkthrough extends Component {
         if (this.state.pageIndex == 0) return true;
     }
 
+
+    continueToMain() {
+        this.props.navigation.navigate('Friends');
+        this.setModalVisible(false);
+    }
 
     render() {
 
@@ -73,28 +80,51 @@ export default class Walkthrough extends Component {
                     <Button title={'START CATCHING UP!'} color={'#FFFFFF'} onPress={() => this.setModalVisible(true)} />
                 </View>
         }
+
+        let modalContent;
+
+        if (this.state.modalNum === 0) {
+            modalContent =
+                <View style={{  backgroundColor: '#FFFFFF', height: 236, width:370, alignSelf: 'center', borderRadius: 20, alignItems: 'center'}}>
+                    <Text style={{fontWeight: 'bold', marginTop: 20, fontSize: 17}}>CatchUp! needs to access your Friend List</Text>
+                    <Text style={{textAlign: 'center', marginTop: 5, lineHeight: 20,}}>The app will help you reconnect with old friends by accessing your list of friends on Facebook</Text>
+                    <View style={{backgroundColor: '#925dc5', borderRadius:40, height:57, width:278,  justifyContent:'center', marginTop: 30}}>
+                        <Button color='#FFFFFF' title={'GIVE ACCESS'} onPress={() => this.setState({modalNum: 1})}/>
+                    </View>
+
+                    <Button color='#925dc5' title={'skip'} onPress={() => this.setState({modalNum: 1})}/>
+                </View>
+        }
+        else if (this.state.modalNum === 1) {
+            modalContent =
+                <View style={{  backgroundColor: '#FFFFFF', height: 236, width:370, alignSelf: 'center', borderRadius: 20, alignItems: 'center'}}>
+                    <Text style={{fontWeight: 'bold', marginTop: 20, fontSize: 17}}>CatchUp! needs to access your location</Text>
+                    <Text style={{textAlign: 'center', marginTop: 5, lineHeight: 20,}}>Your current location will be used for helping friends see where you are around the world.</Text>
+                    <View style={{backgroundColor: '#925dc5', borderRadius:40, height:57, width:278,  justifyContent:'center', marginTop: 30}}>
+                        <Button color='#FFFFFF' title={'SHARE LOCATION'} onPress={() => this.setState({modalNum: 2})}/>
+                    </View>
+
+                    <Button color='#925dc5' title={'skip'} onPress={() => this.setState({modalNum: 2})}/>
+                </View>
+        }
+
+        else if (this.state.modalNum === 2) {
+            modalContent =
+                <View style={{  backgroundColor: '#FFFFFF', height: 236, width:370, alignSelf: 'center', borderRadius: 20, alignItems: 'center'}}>
+                    <Text style={{fontWeight: 'bold', marginTop: 20, fontSize: 17}}>CatchUp! needs to send you notifications</Text>
+                    <Text style={{textAlign: 'center', marginTop: 5, lineHeight: 20,}}>The app will notify you when you and your friends are nearby.</Text>
+                    <View style={{backgroundColor: '#925dc5', borderRadius:40, height:57, width:278,  justifyContent:'center', marginTop: 30}}>
+                        <Button color='#FFFFFF' title={'GET NOTIFIED'} onPress={() => this.continueToMain()}/>
+                    </View>
+
+                    <Button color='#925dc5' title={'skip'} onPress={() => this.props.navigation.navigate('Friends')}/>
+                </View>
+        }
         return (
 
                 <View style={{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-                    <Modal
-                        animationType="slide"
-                        transparent={false}
-                        visible={this.state.modalVisible}
-                        onRequestClose={() => {
-                            Alert.alert('Modal has been closed.');
-                        }}>
-                        <View style={{marginTop: 22}}>
-                            <View>
-                                <Text>Hello World!</Text>
-
-                                <TouchableHighlight
-                                    onPress={() => {
-                                        this.setModalVisible(!this.state.modalVisible);
-                                    }}>
-                                    <Text>Hide Modal</Text>
-                                </TouchableHighlight>
-                            </View>
-                        </View>
+                    <Modal isVisible={this.state.modalVisible}>
+                        {modalContent}
                     </Modal>
                     {page}
                     {navbutton}
