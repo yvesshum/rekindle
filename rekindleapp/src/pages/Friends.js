@@ -149,7 +149,7 @@ constructor(props) {
               />
 
               {this.getUserData("2684866978225110").chats.map((chat) => {
-                return (<Log date={chat.date} from={chat.from} msg={chat.last_message} url={this.getUserData(chat.from).pic_url} />)
+                return (<Log date={chat.date} from={chat.from} msg={chat.last_message} />)
               })}
 
             </ScrollView>

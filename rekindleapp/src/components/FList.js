@@ -38,9 +38,21 @@ class FList extends Component {
           modalVisible: false
         })  
       }
+    }
 
-
-      
+    getUserUrl(id) {
+      //since we don't have a database here we go!
+  
+      switch (id) {
+          case "Jiaqi Gao":
+              return require('../../assets/userData/yves.png');
+          case "Yves Shum":
+              return require('../../assets/userData/yves.png');
+          case "Yena Kim":
+              return require('../../assets/userData/yena.png');
+          default:
+              return require('../../assets/userData/yena.png');
+      }
     }
 
     render() {
@@ -77,7 +89,7 @@ class FList extends Component {
                   <View style={styles.image}>
                       <Image
                           style={{width: 75, height: 75}}
-                          source={require('../../assets/userData/yena.png')}
+                          source={this.getUserUrl(this.props.name)}
                       />
                   </View>
 
