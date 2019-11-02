@@ -28,6 +28,8 @@ export default class HomeScreen extends Component {
                   }
               }
                   onLogoutFinished={() => console.log("logout.")}/>
+
+            <Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>
         </View>
     
       );
