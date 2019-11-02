@@ -80,38 +80,53 @@ export default class Messages extends Component {
         this.setState({ search });
       };
 
+      
+
     render() {
-      const { navigation } = this.props;
+        const { navigation } = this.props;
 
-      const userName = navigation.getParam('userName', 'NO-ID');
-
+        friendsList = [navigation.getParam('friendsList')];
       const { search } = this.state;
-
 
       return (
         <View>
-             {this.props.name == "" ? 
-             <SearchBar
-                platform="ios"
-                placeholder="Type Here..."
-                onChangeText={this.updateSearch}
-                value={search}
-            />
+             {this.props.blank == "True" ? 
+
+                <View style={styles.heading}>
+                            
+                <Text style={styles.name}>Long time no talk, nameHere</Text>
+ 
+                {/* <Image
+                style={styles.image}
+                style={{width: 100, height: 100}}
+                source={{uri: 'https://facebook.github.io/react-native/img/tiny_logo.png'}}
+                /> */}
+
+                </View>
+                :
+                <View style={styles.newHeading}>
+
+                    <Text style={styles.title}>New Message</Text>
+
+                <SearchBar
+                        platform="ios"
+                        placeholder="Type Here..."
+                        onChangeText={this.updateSearch}
+                        value={search}
+                        style={styles.search}
+                    />
+
+                    <Text>People</Text>
+
+                    {friendsList.map((friend) => {
+                        if (search.length < 3 || (friend["name"]).slice(0, this.state.search.length) == this.state.search) {
+                        <FList key={friend["id"]} name={friend["name"]} />
+                        }
+                    })}
 
 
-          :
-          <View style={styles.heading}>
-               
-             <Text style={styles.name}>Long time no talk, nameHere</Text>
-              
-             <Image
-              style={styles.image}
-              style={{width: 100, height: 100}}
-              source={{uri: 'https://facebook.github.io/react-native/img/tiny_logo.png'}}
-              />
-
-          </View>
-          }
+                </View>
+                }
 
             
         </View>
@@ -125,9 +140,17 @@ export default class Messages extends Component {
 const styles = StyleSheet.create({
     heading: {
         alignItems: 'center',
-        marginTop: 100,
         fontSize: 20,
         margin: 20
+    },
+    newHeading: {
+        alignItems: 'center',
+        marginBottom: 20
+    },
+    title: {
+        fontSize: 20,
+        marginTop: 70,
+        marginBottom: 20
     },
     image: {
       marginRight: 10,
@@ -140,6 +163,9 @@ const styles = StyleSheet.create({
     },
     name: {
       fontSize: 20
+    },
+    search: {
+        padding: 20,
     }
     
   });

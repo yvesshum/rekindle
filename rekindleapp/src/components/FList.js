@@ -23,8 +23,11 @@ export default class FList extends Component {
     }
 
     handleSend() {
+      const { navigate } = this.props.navigation;
 
+      navigate('Messages', {blank:"True", friendName: this.props.id});
     }
+
     render() {
     let modalContent =
         <View style={{  backgroundColor: '#FFFFFF', height: 200, width:370, alignSelf: 'center', borderRadius: 20, alignItems: 'center'}}>

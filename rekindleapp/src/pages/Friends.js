@@ -11,10 +11,19 @@ import BottomNavigation, {
 } from 'react-native-material-bottom-navigation'
 
 export default class Friends extends Component {
-  state = {
+  static navigationOptions = {
+    header: null,
+};
+
+constructor(props) {
+  super(props);
+  this.state = {
     search: '',
-    activeTab: 'Friends'
+    activeTab: 'Friends',
+    friendsList: this.props.friendsList
   };
+
+}
 
 
   tabs = [
@@ -80,7 +89,10 @@ export default class Friends extends Component {
       const { navigation } = this.props;
       const { navigate } = this.props.navigation;
 
-      const userName = navigation.getParam('userName', 'NO-ID');
+      let friendsList = navigation.getParam('friendsList');
+
+
+      let userName = navigation.getParam('userName', 'NO-ID');
 
       flists = this.getFriendsFromUser(userName).map((friend) => {
         return {
@@ -106,7 +118,7 @@ export default class Friends extends Component {
                 value={search}
               />
 
-              {flists.map((friend) => {
+               {flists.map((friend) => {
                 if (search.length < 3 || (friend.name).slice(0, this.state.search.length) == this.state.search) {
                   return (<FList key={friend.id} name={friend.name}></FList>)
                 }
@@ -120,7 +132,7 @@ export default class Friends extends Component {
               <View style={FriendStyles.chatHeader}>
                 <Text style={FriendStyles.title}>Messages &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </Text>
 
-                <Icon style={FriendStyles.add} size={50} color="black" name="add-box" onPress={() => navigate('Messages')}/>
+                <Icon style={FriendStyles.add} size={50} color="black" name="add-box" onPress={() => navigate('Messages', {blank:"True", userName: this.userName, friendsList: flists})}/>
 
               </View>
 
@@ -134,9 +146,7 @@ export default class Friends extends Component {
               />
 
             </ScrollView>
-            
-            
-            
+          
             }
 
             <View style={FriendStyles.footer}>
@@ -155,7 +165,7 @@ export default class Friends extends Component {
 
   const FriendStyles = StyleSheet.create({
     header: {
-      marginTop: 20,
+      marginTop: 80,
       fontSize: 25,
       marginBottom: 20,
       flexDirection:'row', 
@@ -165,7 +175,7 @@ export default class Friends extends Component {
       marginLeft: 500
     },
     chatHeader: {
-      marginTop: 20,
+      marginTop: 80,
       marginBottom: 20,
       flexDirection:'row', 
       textAlign: "center",
@@ -177,7 +187,8 @@ export default class Friends extends Component {
       textAlign: "center"
     },
     chatSearch: {
-      position: 'absolute'
+      position: 'absolute',
+      marginBottom: 30
     },
     flex: {
       flex: 1

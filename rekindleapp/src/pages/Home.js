@@ -27,7 +27,7 @@ export default class HomeScreen extends Component {
         this.setState({currentUserName: data.name});
         this.setState({currentUserLikes: data.likes.data});
         if (data) {
-            this.props.navigation.navigate('Walkthrough')
+            this.props.navigation.navigate('Walkthrough', {friendsList: this.state.userFriends, userName:this.state.currentUserName})
         }
 
     }
@@ -48,9 +48,6 @@ export default class HomeScreen extends Component {
                 <Text style={[{textDecorationLine: 'underline'}, HomeStyles.text]}>Terms</Text><Text style={HomeStyles.text}> and </Text><Text style={[{textDecorationLine: 'underline', marginBottom: 25}, HomeStyles.text]}>Privacy Policy</Text>
             </View>
             <LoginComp onRef={ref => (this.parentReference = ref)} parentReference={this.retrieveDataFromLoginChild.bind(this)} />
-            {/*<Text>{this.state.currentUserName}</Text>*/}
-            {/*{Friends}*/}
-            {/*<Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>*/}
             <Text>{this.state.currentUserName}</Text>
             {Friends}
         </SafeAreaView>

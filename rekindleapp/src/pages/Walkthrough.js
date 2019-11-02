@@ -21,6 +21,11 @@ export default class Walkthrough extends Component {
         this.setModalVisible = this.setModalVisible.bind(this);
         this.continueToMain = this.continueToMain.bind(this);
 
+        const { navigation } = this.props;
+
+        let friendsList = navigation.getParam('friendsList');
+        console.warn(this.friendsList);
+
     }
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
@@ -47,12 +52,13 @@ export default class Walkthrough extends Component {
 
 
     continueToMain() {
-        this.props.navigation.navigate('Friends');
+        this.props.navigation.navigate('Friends', {friendsList: this.props.friendsList, userName: this.props.userName});
         this.setModalVisible(false);
-    }
+    }   
+
+
 
     render() {
-
         let page;
 
         if (this.state.pageIndex === 0) {
@@ -117,7 +123,7 @@ export default class Walkthrough extends Component {
                         <Button color='#FFFFFF' title={'GET NOTIFIED'} onPress={() => this.continueToMain()}/>
                     </View>
 
-                    <Button color='#925dc5' title={'skip'} onPress={() => this.props.navigation.navigate('Friends')}/>
+                    <Button color='#925dc5' title={'skip'} onPress={() => this.props.navigation.navigate('Friends', {friendsList:this.friendsList})}/>
                 </View>
         }
         return (
