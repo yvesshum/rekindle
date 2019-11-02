@@ -80,7 +80,7 @@ export default class Friends extends Component {
 
 
       return (
-       <View>
+       <View style={FriendStyles.flex}>
             <ScrollView>
             {/* {navigation.getParam('userName', 'NO-ID')}'s  */}
               <Text style={FriendStyles.header}>Friends</Text>
@@ -118,9 +118,12 @@ export default class Friends extends Component {
       marginBottom: 20,
       fontSize: 25,
       textAlign: "center",
+    },
+    flex: {
       flex: 1
     },
     footer: {
-      
+      position: 'relative',
+      marginBottom: 0
     }
 });
