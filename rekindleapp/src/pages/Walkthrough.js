@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 
 import {  View, Image, Text, Button, TouchableOpacity, TouchableHighlight} from 'react-native';
 import Modal from 'react-native-modal'
-export default class Walkthrough extends Component {
+import { withNavigation } from 'react-navigation';
+
+class Walkthrough extends Component {
 
     static navigationOptions = {
         header: null,
@@ -52,6 +54,7 @@ export default class Walkthrough extends Component {
 
 
     continueToMain() {
+        console.log('ctm', this.props.friendsList, this.props.userName)
         this.props.navigation.navigate('Friends', {friendsList: this.props.friendsList, userName: this.props.userName});
         this.setModalVisible(false);
     }   
@@ -142,3 +145,5 @@ export default class Walkthrough extends Component {
     }
 }
 
+
+export default withNavigation(Walkthrough)

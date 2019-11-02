@@ -5,13 +5,13 @@ import { SafeAreaView, View, Text, Image, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements'
 import { SearchBar } from 'react-native-elements';
-
+import { withNavigation} from 'react-navigation';
 
 import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation'
 
-export default class Friends extends Component {
+class Friends extends Component {
   static navigationOptions = {
     header: null,
 };
@@ -63,39 +63,43 @@ constructor(props) {
 
   getFriendsFromUser(userID) {
     let userData = this.getUserData(userID); //Might need to run JSON.parse(), not sure
-    let friendList = userData.friends
+    let friendList = userData.friends;
+    console.log('uid', userID);
     let friendData = {};
     friendList.forEach(friend => {
-        let friendName = this.getUserData(friend.id).name
-        friendData[friend.id] = [friend, friendName]
-        
+        let friendName = this.getUserData(friend).name;
+        friendData[friend] = [friend, friendName]
     });
-    let friendNames = Object.keys(friendData).map(id => [friendData[id][0], friendData[id][1]])
+    console.log('data', friendData);
+    let friendNames = Object.keys(friendData).map(id => [friendData[id][0], friendData[id][1]]);
     return friendNames
-}
+  }
  
   getUserData(id) {
         //since we don't have a database here we go!
-        switch (id) {
-            case '2684866978225110' || "Jiaqi Gao":
-                return require('../../assets/userData/2684866978225110.json');
-            case '2559221700767822' || "Yves Shum":
-                return require('../../assets/userData/2559221700767822.json');
-            default:
-                return require('../../assets/userData/2559221700767822.json')
-        }
+
+      switch (id) {
+          case '2684866978225110' || "Jiaqi Gao":
+              return require('../../assets/userData/2684866978225110.json');
+          case '2559221700767822' || "Yves Shum":
+              return require('../../assets/userData/2559221700767822.json');
+          case '2984866978225110':
+              return require('../../assets/userData/2984866978225110.json');
+          default:
+              return require('../../assets/userData/2559221700767822.json');
+      }
     }
 
     render() {
-      const { navigation } = this.props;
-      const { navigate } = this.props.navigation;
 
-      let friendsList = navigation.getParam('friendsList');
+      let friendsList = this.props.navigation.getParam('friendsList');
+      console.log('FFFLIST', friendsList);
+      friendsList = ["2684866978225110", "2984866978225110"];
+      let userName = this.props.navigation.getParam('userName');
 
-
-      let userName = navigation.getParam('userName', 'NO-ID');
-
-      flists = this.getFriendsFromUser(userName).map((friend) => {
+      console.log('username', userName);
+      console.log('friendsList', friendsList);
+      let flists = this.getFriendsFromUser(userName).map((friend) => {
         return {
           name: friend[1],
           id: friend[0],
@@ -121,6 +125,7 @@ constructor(props) {
               />
 
                {flists.map((friend) => {
+                 console.warn(flists);
                 if (search.length < 3 || (friend.name).slice(0, this.state.search.length) == this.state.search) {
                   return (<FList key={friend.id} name={friend.name}></FList>)
                 }
@@ -202,3 +207,4 @@ constructor(props) {
       marginBottom: 0
     }
 });
+export default withNavigation(Friends);
