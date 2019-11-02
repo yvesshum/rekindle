@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 import LoginComp from '../components/Login.js';
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -37,7 +37,16 @@ export default class HomeScreen extends Component {
 
       return (
         <SafeAreaView style={HomeStyles.container}>
+            <Image source={require('../../assets/Logo.png')} style={{width: 300, height: 80}}/>
+
+            <Text style={HomeStyles.text}>By logging in, you agree to our</Text>
+            <View style={{flexDirection: 'row'}}>
+                <Text style={[{textDecorationLine: 'underline'}, HomeStyles.text]}>Terms</Text><Text style={HomeStyles.text}> and </Text><Text style={[{textDecorationLine: 'underline'}, HomeStyles.text]}>Privacy Policy</Text>
+            </View>
             <LoginComp onRef={ref => (this.parentReference = ref)} parentReference={this.retrieveDataFromLoginChild.bind(this)}/>
+            {/*<Text>{this.state.currentUserName}</Text>*/}
+            {/*{Friends}*/}
+            {/*<Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>*/}
             <Text>{this.state.currentUserName}</Text>
             {Friends}
             <Button title="See friends" onPress={() => navigate('Friends', {userName: this.state.currentUserName})}/>
@@ -63,5 +72,9 @@ const HomeStyles = StyleSheet.create({
     red: {
         color: 'red',
     },
+
+    text: {
+        color: '#FFFFFF'
+    }
 });
 
