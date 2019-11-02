@@ -23,9 +23,7 @@ export default class FList extends Component {
     }
 
     handleSend() {
-      const { navigate } = this.props.navigation;
-
-      navigate('Messages', {blank:"True", friendName: this.props.id});
+      this.props.navigation.navigate('YenaChat');
     }
 
     activate(signal) {
@@ -38,7 +36,7 @@ export default class FList extends Component {
         this.setState({
           active: 0.3,
           modalVisible: false
-        })
+        })  
       }
 
 
