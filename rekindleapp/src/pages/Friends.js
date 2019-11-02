@@ -64,13 +64,11 @@ constructor(props) {
   getFriendsFromUser(userID) {
     let userData = this.getUserData(userID); //Might need to run JSON.parse(), not sure
     let friendList = userData.friends;
-    console.log('uid', userID);
     let friendData = {};
     friendList.forEach(friend => {
         let friendName = this.getUserData(friend).name;
         friendData[friend] = [friend, friendName]
     });
-    console.log('data', friendData);
     let friendNames = Object.keys(friendData).map(id => [friendData[id][0], friendData[id][1]]);
     return friendNames
   }
