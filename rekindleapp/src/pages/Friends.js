@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FList from '../components/FList';  
+import Log from '../components/Log'
 import { SafeAreaView, View, Text, Image, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements'
@@ -132,9 +133,7 @@ constructor(props) {
 
               <View style={FriendStyles.chatHeader}>
                 <Text style={FriendStyles.title}>Messages &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </Text>
-
                 <Icon style={FriendStyles.add} size={50} color="black" name="add-box" onPress={() => navigate('Messages', {blank:"True", userName: this.props.userName, friendsList: flists})}/>
-
               </View>
 
               
@@ -145,6 +144,10 @@ constructor(props) {
                 value={search}
                 style={FriendStyles.chatSearch}
               />
+
+              {this.getUserData("2684866978225110").chats.map((chat) => {
+                return (<Log date={chat.date} from={chat.from} msg={chat.last_message} />)
+              })}
 
             </ScrollView>
           
