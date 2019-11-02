@@ -35,7 +35,7 @@ export default class FList extends Component {
         })
       }else{
         this.setState({
-          active: 0.5,
+          active: 0.3,
           modalVisible: false
         })
       }
@@ -45,7 +45,7 @@ export default class FList extends Component {
     }
 
     render() {
-    let modalContent = this.state.active == 0.5 ?
+    let modalContent = this.state.active == 0.3 ?
         <View style={{  backgroundColor: '#FFFFFF', height: 200, width:370, alignSelf: 'center', borderRadius: 20, alignItems: 'center'}}>
             <Text style={{fontWeight: 'bold', marginTop: 20, fontSize: 17}}>Would you like to receive messages</Text>
             <Text style={{fontWeight: 'bold', marginTop: 5, fontSize: 17}}>from this friend?</Text>
@@ -78,7 +78,7 @@ export default class FList extends Component {
                   <View style={styles.image}>
                       <Image
                           style={{width: 75, height: 75}}
-                          source={{uri: 'https://facebook.github.io/react-native/img/tiny_logo.png'}}
+                          source={require('../../assets/userData/yves.png')}
                       />
                   </View>
 
