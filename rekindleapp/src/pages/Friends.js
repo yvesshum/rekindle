@@ -121,12 +121,6 @@ export default class Friends extends Component {
       flex: 1
     },
     footer: {
-      position: 'absolute', 
-      left: 0,
-      right: 0,
-      bottom: 0,
-      flex: 1,
-      justifyContent: 'flex-end',
-      marginBottom: -650
+      
     }
 });
