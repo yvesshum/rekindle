@@ -56,25 +56,42 @@ export default class Friends extends Component {
     this.setState({ search });
   };
 
+  getFriendsFromUser(userID) {
+    let userData = this.getUserData(userID); //Might need to run JSON.parse(), not sure
+    let friendList = userData.friends
+    let friendData = {};
+    friendList.forEach(friend => {
+        let friendName = this.getUserData(friend.id).name
+        friendData[friend.id] = [friend, friendName]
+        
+    });
+    let friendNames = Object.keys(friendData).map(id => [friendData[id][0], friendData[id][1]])
+    return friendNames
+}
+ 
+  getUserData(id) {
+        //since we don't have a database here we go!
+        switch (id) {
+            case '2684866978225110':
+                return require('../../assets/userData/2684866978225110.json');
+            case '2559221700767822':
+                return require('../../assets/userData/2559221700767822.json');
+            default:
+                return require('../../assets/userData/2559221700767822.json')
+        }
+    }
+
     render() {
       const { navigation } = this.props;
 
-      flists = [{
-        id: "f1",
-        name: "Joe LastName"
-      },
-      {
-        id: "f2",
-        name: "Yena LastName"
-      },
-      {
-        id: "f3",
-        name: "Yves LastName"  
-      },
-      {
-        id: "f4",
-        name: "Jiaqi LastName"
-      }]
+      const userName = navigation.getParam('userName', 'NO-ID');
+
+      flists = this.getFriendsFromUser(userName).map((friend) => {
+        return {
+          name: friend[1],
+          id: friend[0]
+        }
+      })
 
       const { search } = this.state;
 
