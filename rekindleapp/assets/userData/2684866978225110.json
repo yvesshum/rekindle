@@ -23,9 +23,19 @@
       }
     ]
   },
+  "hometown": {
+    "name": "Hong Kong"
+  },
+  "education": [
+    {
+      "name": "University of Chicago"
+    }
+  ],
+  "sent_recipients": [],
   "id": "2684866978225110",
   "friends": [
     "2559221700767822"
   ],
   "name": "Yves Shum"
 }
+

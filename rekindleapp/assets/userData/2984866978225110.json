@@ -1,0 +1,25 @@
+{
+  "likes": {
+    "data": [
+      {
+        "name": "University of Chicago",
+        "id": "105015140873217",
+        "created_time": "2019-10-19T23:19:29+0000"
+      }
+    ]
+  },
+  "id": "2984866978225110",
+  "hometown": {
+    "name": "New York"
+  },
+  "education": [
+  {
+    "name": "University of Chicago"
+  }
+  ],
+  "sent_recipients": [],
+  "friends": [
+    "2559221700767822"
+  ],
+  "name": "Yena Kim"
+}

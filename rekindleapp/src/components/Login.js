@@ -64,8 +64,10 @@ export default class LoginComp extends Component {
                 return require('../../assets/userData/2684866978225110.json');
             case '2559221700767822':
                 return require('../../assets/userData/2559221700767822.json');
+            case '2984866978225110':
+                return require('../../assets/userData/2984866978225110.json');
             default:
-                return require('../../assets/userData/2559221700767822.json')
+                return require('../../assets/userData/2559221700767822.json');
         }
     }
 
@@ -84,7 +86,6 @@ export default class LoginComp extends Component {
                                 AccessToken.getCurrentAccessToken().then(
                                     (data) => {
                                         this.handleLoginComplete(data.accessToken)
-
                                     }
                                 )
                             }
