@@ -30,14 +30,14 @@ constructor(props) {
   tabs = [
     {
       key: 'Friends',
-      icon: 'gamepad-variant',
+      icon: 'chat-bubble',
       label: 'Friends',
       barColor: '#388E3C',
       pressColor: 'rgba(255, 25, 255, 0.16)'
     },
     {
       key: 'Chat',
-      icon: 'movie',
+      icon: 'check-circle',
       label: 'Chat',
       barColor: '#B71C1C',
       pressColor: 'rgba(55, 255, 255, 0.16)'
@@ -77,9 +77,9 @@ constructor(props) {
   getUserData(id) {
         //since we don't have a database here we go!
         switch (id) {
-            case '2684866978225110':
+            case '2684866978225110' || "Jiaqi Gao":
                 return require('../../assets/userData/2684866978225110.json');
-            case '2559221700767822':
+            case '2559221700767822' || "Yves Shum":
                 return require('../../assets/userData/2559221700767822.json');
             default:
                 return require('../../assets/userData/2559221700767822.json')
@@ -146,7 +146,7 @@ constructor(props) {
               />
 
               {this.getUserData("2684866978225110").chats.map((chat) => {
-                return (<Log date={chat.date} from={chat.from} msg={chat.last_message} />)
+                return (<Log date={chat.date} from={chat.from} msg={chat.last_message} url={this.getUserData(chat.from).pic_url} />)
               })}
 
             </ScrollView>
