@@ -1,34 +1,42 @@
 import React, { Component } from 'react';
 
 import { SafeAreaView, View, Text, Button } from 'react-native';
-import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import LoginComp from '../components/Login.js';
 
 export default class HomeScreen extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state={
+            userFriends: [],
+            currentUserName: "",
+        }
+
+    }
     static navigationOptions = {
       title: 'Welcome',
     };
+
+    
+    retrieveDataFromLoginChild(data){
+        console.warn('retrieved data:', data);
+        this.setState({userFriends: data.friends})
+        console.warn('friends:', this.state.userFriends)
+        this.setState({currentUserName: data.name})
+    }
+
     render() {
       const {navigate} = this.props.navigation;
+
+      const Friends = this.state.userFriends.map(friend =>
+         <Text>{friend}</Text>
+      );
+
       return (
         <View>
-            <LoginButton
-                  onLoginFinished={
-                  (error, result) => {
-                      if (error) {
-                          console.log("login has error: " + result.error);
-                      } else if (result.isCancelled) {
-                          console.log("login is cancelled.");
-                      } else {
-                          AccessToken.getCurrentAccessToken().then(
-                              (data) => {
-                                  console.log(data.accessToken.toString())
-                              }
-                          )
-                      }
-                  }
-              }
-                  onLogoutFinished={() => console.log("logout.")}/>
-
+            <LoginComp onRef={ref => (this.parentReference = ref)} parentReference={this.retrieveDataFromLoginChild.bind(this)}/>
+            <Text>{this.state.currentUserName}</Text>
+            {Friends}
             <Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>
         </View>
     
