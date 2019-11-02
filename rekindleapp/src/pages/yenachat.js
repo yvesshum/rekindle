@@ -24,7 +24,9 @@ export default class YenaChat extends Component {
         super(props);
         this.state={
             modalVisible: false,
+            img: 0
         };
+
         this.setModalVisible = this.setModalVisible.bind(this);
     }
 
@@ -38,15 +40,15 @@ export default class YenaChat extends Component {
 
     handleButtonPress() {
         this.setModalVisible(true);
+
     }
 
     continueToMain() {
         this.setModalVisible(false);
-
+        this.setState({img: 1});
     }
 
     render() {
-
         let modalContent =
             <View style={{  backgroundColor: '#FFFFFF', height: 236, width:370, alignSelf: 'center', borderRadius: 20, alignItems: 'center'}}>
                 <Text style={{fontWeight: 'bold', marginTop: 20, fontSize: 17}}>Notice!</Text>
@@ -58,11 +60,22 @@ export default class YenaChat extends Component {
                 <Button color='#925dc5' title={'cancel'} onPress={() => this.setModalVisible(false)}/>
             </View>
 
+        let img;
+
+        if (this.state.img === 0) {
+            img =
+                <Image source={require('../../assets/yenachat.jpg')} style={{width:410, height: 780, marginLeft: 0, marginTop: 70, position:'absolute'}}/>
+        }
+        else {
+            img =
+                <Image source={require('../../assets/yenachatwithtext.jpg')} style={{width:410, height: 780, marginLeft: 0, marginTop: 70, position:'absolute'}}/>
+        }
+
 
         return (
             <View>
                 <TouchableOpacity onPress={() => this.handleButtonPress()}>
-                    <Image source={require('../../assets/yenachat.jpg')} style={{width:410, height: 780, marginLeft: 0, marginTop: 70, position:'absolute'}}/>
+                    {img}
                 </TouchableOpacity>
                 <Modal isVisible={this.state.modalVisible}>
                     {modalContent}
