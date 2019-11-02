@@ -3,34 +3,40 @@ import FList from '../components/FList';
 import { SafeAreaView, View, Text, Image, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements'
+import { SearchBar } from 'react-native-elements';
 
 import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation'
 
 export default class Friends extends Component {
+  state = {
+    search: '',
+  };
+
+
   tabs = [
     {
-      key: 'games',
+      key: 'Friends',
       icon: 'gamepad-variant',
-      label: 'Games',
+      label: 'Friends',
       barColor: '#388E3C',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      pressColor: 'rgba(255, 25, 255, 0.16)'
     },
     {
-      key: 'movies-tv',
+      key: 'Chat',
       icon: 'movie',
-      label: 'Movies & TV',
+      label: 'Chat',
       barColor: '#B71C1C',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      pressColor: 'rgba(55, 255, 255, 0.16)'
     },
-    {
-      key: 'music',
-      icon: 'music-note',
-      label: 'Music',
-      barColor: '#E64A19',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
-    }
+    // {
+    //   key: 'Profile',
+    //   icon: 'music-note',
+    //   label: 'Profile',
+    //   barColor: '#E64A19',
+    //   pressColor: 'rgba(255, 255, 25, 0.16)'
+    // }
   ]
 
   renderIcon = icon => ({ isActive }) => (
@@ -46,51 +52,74 @@ export default class Friends extends Component {
     />
   )
 
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
     render() {
       const { navigation } = this.props;
 
       flists = [{
         id: "f1",
-        name: "Joe"
+        name: "Joe LastName"
       },
       {
         id: "f2",
-        name: "Yena"
+        name: "Yena LastName"
       },
       {
         id: "f3",
-        name: "Yves"  
+        name: "Yves LastName"  
       },
       {
         id: "f4",
-        name: "Jiaqi"
+        name: "Jiaqi LastName"
       }]
 
+      const { search } = this.state;
+
+
       return (
-        <SafeAreaView>
+       <View>
             <ScrollView>
-              <Text>Hi {navigation.getParam('userName', 'NO-ID')}!</Text>
+            {/* {navigation.getParam('userName', 'NO-ID')}'s  */}
+              <Text style={FriendStyles.header}>Friends</Text>
+              
+              <SearchBar
+                platform="ios"
+                placeholder="Type Here..."
+                onChangeText={this.updateSearch}
+                value={search}
+              />
 
               {flists.map((friend) => {
-                return (<FList key={friend.id} name={friend.name}></FList>
-              )})}
+                if (search.length < 3 || (friend.name).slice(0, this.state.search.length) == this.state.search) {
+                  return (<FList key={friend.id} name={friend.name}></FList>)
+                }
+              })}
             </ScrollView>
             
             <View style={FriendStyles.footer}>
-              <BottomNavigation
+              <BottomNavigation 
                 onTabPress={newTab => this.setState({ activeTab: newTab.key })}
                 renderTab={this.renderTab}
                 tabs={this.tabs}
-                style={FriendStyles.footer}
             />
             </View>
             
-        </SafeAreaView>
+        </View>
       );
     }
   }
 
   const FriendStyles = StyleSheet.create({
+    header: {
+      marginTop: 20,
+      marginBottom: 20,
+      fontSize: 25,
+      textAlign: "center",
+      flex: 1
+    },
     footer: {
       position: 'absolute', 
       left: 0,
@@ -98,6 +127,6 @@ export default class Friends extends Component {
       bottom: 0,
       flex: 1,
       justifyContent: 'flex-end',
-      marginBottom: -220
+      marginBottom: -650
     }
 });
