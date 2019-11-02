@@ -19,14 +19,6 @@ import {
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import HomeScreen from './pages/Home';
 import Friends from './pages/Friends';
