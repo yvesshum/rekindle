@@ -25,11 +25,13 @@ import Friends from './pages/Friends';
 import Messages from './pages/Messages';
 
 
+import Walkthrough from './pages/Walkthrough'
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
   Friends: {screen: Friends},
-  Messages: {screen: Messages}
+  Messages: {screen: Messages},
+  Walkthrough: {screen: Walkthrough}
 });
 
 const App = createAppContainer(MainNavigator);

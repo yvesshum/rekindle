@@ -25,7 +25,11 @@ export default class HomeScreen extends Component {
         this.setState({userFriends: data.friends});
         console.warn('friends:', this.state.userFriends);
         this.setState({currentUserName: data.name});
-        this.setState({currentUserLikes: data.likes.data})
+        this.setState({currentUserLikes: data.likes.data});
+        if (data) {
+            this.props.navigation.navigate('Walkthrough')
+        }
+
     }
 
     render() {
@@ -37,13 +41,13 @@ export default class HomeScreen extends Component {
 
       return (
         <SafeAreaView style={HomeStyles.container}>
-            <Image source={require('../../assets/Logo.png')} style={{width: 300, height: 80}}/>
+            <Image source={require('../../assets/Logo.png')} style={{width: 300, height: 80, marginTop: 300, marginBottom: 200}}/>
 
             <Text style={HomeStyles.text}>By logging in, you agree to our</Text>
             <View style={{flexDirection: 'row'}}>
-                <Text style={[{textDecorationLine: 'underline'}, HomeStyles.text]}>Terms</Text><Text style={HomeStyles.text}> and </Text><Text style={[{textDecorationLine: 'underline'}, HomeStyles.text]}>Privacy Policy</Text>
+                <Text style={[{textDecorationLine: 'underline'}, HomeStyles.text]}>Terms</Text><Text style={HomeStyles.text}> and </Text><Text style={[{textDecorationLine: 'underline', marginBottom: 25}, HomeStyles.text]}>Privacy Policy</Text>
             </View>
-            <LoginComp onRef={ref => (this.parentReference = ref)} parentReference={this.retrieveDataFromLoginChild.bind(this)}/>
+            <LoginComp onRef={ref => (this.parentReference = ref)} parentReference={this.retrieveDataFromLoginChild.bind(this)} />
             {/*<Text>{this.state.currentUserName}</Text>*/}
             {/*{Friends}*/}
             {/*<Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>*/}
@@ -60,7 +64,7 @@ const HomeStyles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         backgroundColor: '#925dc5'
 
     },
