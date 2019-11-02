@@ -1,4 +1,4 @@
-# Rekindle
+# CatchUp!
 
 ## Setup
 Make sure you run `yarn install` in the `rekindleapp` folder.
