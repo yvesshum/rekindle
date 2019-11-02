@@ -47,6 +47,9 @@ export default class HomeScreen extends Component {
             {/*<Text>{this.state.currentUserName}</Text>*/}
             {/*{Friends}*/}
             {/*<Button title="See friends" onPress={() => navigate('Friends', {name: 'Jane'})}/>*/}
+            <Text>{this.state.currentUserName}</Text>
+            {Friends}
+            <Button title="See friends" onPress={() => navigate('Friends', {userName: this.state.currentUserName})}/>
         </SafeAreaView>
       );
     }
